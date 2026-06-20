@@ -1,0 +1,171 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#312e81,#6d28d9);
+    color:white;
+    min-height:100vh;
+
+    html{
+        scroll-behavior: smooth;
+    }
+}
+
+/*Navbar*/
+
+.navbar{
+    position:sticky;
+    top:0;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 10%;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    z-index:100;
+}
+
+.logo{
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.logo img {
+    height: 80px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.nav-links{
+    display:flex;
+    gap: 30px;
+    text-decoration:none;
+    list-style: none;
+    flex-direction: row;
+}
+.nav-links a{
+    color: white;
+    text-decoration: none;
+}
+
+#theme-btn{
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* Hero */
+
+.hero{
+    text-align: center;
+    padding: 120px 20px;
+}
+
+.hero h1{
+    font-size:4.5rem;
+    line-height: 1.2;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size: 1.2rem;
+    margin-bottom:30px;
+}
+
+.cta-btn{
+    padding:15px 35px;
+    border:none;
+    border-radius: 30px;
+    cursor:pointer;
+
+    font-size:1rem;
+    transition:.3s;
+}
+
+.cta-btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 10px 25px rgba(255,255,255,0.3);
+}
+
+/* Services */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    padding:50px 10%;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(20px);
+    border-radius: 20px;
+    text-align:center;
+    padding: 40px 20px;
+    transition:.4s;
+}
+
+.card i{
+    font-size: 3rem;
+    margin-bottom:20px;
+    border:1px solid rgba(255,255,255,0.15);
+}
+
+.card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 15px 40px rgba(255,255,255,0.2);
+}
+
+/* Footer */
+
+footer{
+    padding:40px;
+    text-align: center;
+}
+
+.social-icons{
+    margin-top:15px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    font-size:1.5rem;
+}
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction: column;
+        gap:20px;
+    }
+
+    .nav-links{
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero h1{
+        font-size: 2.5rem;
+    }
+
+    .services{
+        grid-template-columns: 1fr;
+    }
+}
+
+body.dark{
+    background: linear-gradient(135deg,#000a20,#0f172a,#000);
+    color:rgb(6, 236, 148);
+}
+
+.cta-btn{
+    background: white;
+    color:#312e81;
+    font-weight:bold;
+}
