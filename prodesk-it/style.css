@@ -5,14 +5,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     background:linear-gradient(135deg,#0f172a,#312e81,#6d28d9);
     color:white;
     min-height:100vh;
-
-    html{
-        scroll-behavior: smooth;
-    }
 }
 
 /*Navbar*/
@@ -201,6 +201,12 @@ footer{
 
 @media(max-width:768px){
 
+    *{
+        animation:none !important;
+        transition:none !important;
+        scroll-behavior:auto;
+    }
+
     .navbar{
         flex-wrap:wrap;
     }
@@ -231,12 +237,19 @@ footer{
 }
 
 body.dark{
-    background: linear-gradient(135deg,#000a20,#0f172a,#000);
-    color:rgb(6, 236, 148);
+    background:linear-gradient(
+    135deg,
+    #020617,
+    #0f172a,
+    #000
+);
+    color:white;
 }
 
 .cta-btn{
     background: white;
     color:#312e81;
     font-weight:bold;
+    display:inline-block;
+    text-decoration:none;
 }
