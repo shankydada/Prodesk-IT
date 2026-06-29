@@ -86,7 +86,7 @@ prodesk-it/Prompts.md
 Live Site:
 
 ```text
-Add your Vercel or Netlify URL here
+https://prodesk-it-ashy.vercel.app/
 ```
 
 ---
