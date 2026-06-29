@@ -1,5 +1,5 @@
 
-// Cash Flow Tracker - Refactored
+// Cash Flow Tracker
 let totalSalary = Number(localStorage.getItem("salary")) || 0;
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 let conversionRate = 1;
