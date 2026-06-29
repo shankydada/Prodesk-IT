@@ -141,4 +141,4 @@ The application's implementation, integration, testing, and final submission wer
 (https://prodesk-it-sprint2-xi.vercel.app)
 
 ## Video link
-https://drive.google.com/file/d/1M54TcSybAF6fiXAKhXLdtkWZs_uIe1Mr/view?usp=sharing
+[https://drive.google.com/file/d/1M54TcSybAF6fiXAKhXLdtkWZs_uIe1Mr/view?usp=sharing](https://drive.google.com/file/d/18qijZPAq64_2WXSGKiYMpAm5uOE0IWNm/view?usp=sharing]
