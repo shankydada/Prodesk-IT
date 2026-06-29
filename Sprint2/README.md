@@ -107,20 +107,6 @@ cd CashFlowTracker
 * API Integration
 * Input Validation
 
----
-
-## Suggested Screenshots
-
-Add screenshots after completing the project.
-
-```
-screenshots/
-│
-├── dashboard.png
-├── expense-list.png
-├── chart.png
-└── pdf-report.png
-```
 
 ---
 
@@ -150,6 +136,6 @@ The application's implementation, integration, testing, and final submission wer
 
 ---
 
-## License
+## VERCEL Link
 
-This project was developed for educational and internship evaluation purposes.
+(https://prodesk-it-sprint2-xi.vercel.app)
