@@ -1,6 +1,3 @@
-import { db } from "@/db";
-import { apiFetchLogs } from "@/db/schema";
-
 export const dynamic = "force-dynamic";
 
 const MAX_LABEL_LENGTH = 120;
@@ -94,6 +91,7 @@ async function writeLog(log: {
   errorMessage: string | null;
 }) {
   try {
+    const [{ db }, { apiFetchLogs }] = await Promise.all([import("@/db"), import("@/db/schema")]);
     await db.insert(apiFetchLogs).values(log);
   } catch (error) {
     console.error("[API Fetching] Failed to write request log", error);

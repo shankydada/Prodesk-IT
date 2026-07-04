@@ -1,4 +1,3 @@
-import { db } from "@/db";
 import { apiFetchLogs } from "@/db/schema";
 import { desc } from "drizzle-orm";
 
@@ -6,6 +5,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
+    const { db } = await import("@/db");
     const logs = await db
       .select({
         id: apiFetchLogs.id,
