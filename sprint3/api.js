@@ -1,8 +1,3 @@
-// =============================================================================
-// api.js — Network layer.
-// Sprint requirement: native fetch(), async/await, Promise.all() (Phase 3).
-// No Axios for Phase 1 & 2 (FAQ #5).
-// =============================================================================
 
 import { sanitize } from './utils.js';
 
