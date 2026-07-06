@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dev-Detective — a vanilla JavaScript app that explores GitHub profiles and compares developers using the GitHub REST API." />
+  <meta name="theme-color" content="#0d1117" />
+  <title>Dev-Detective · GitHub Profile Explorer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕵️</text></svg>" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Top bar -->
+    <header class="topbar" role="banner">
+      <div class="topbar-inner">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </span>
+          <span>Dev-Detective</span>
+        </div>
+        <div class="topbar-meta" aria-label="API status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>GitHub API</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="container" id="main">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Explore GitHub Profiles</h1>
+          <p class="page-subtitle">Search any public GitHub user or compare two developers side-by-side.</p>
+        </div>
+        <div
+          id="modeToggle"
+          class="mode-toggle"
+          role="button"
+          tabindex="0"
+          aria-pressed="false"
+          aria-label="Toggle between single search and battle mode"
+        >
+          <span class="mode-toggle__label" id="modeLabel">Single</span>
+          <span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span>
+        </div>
+      </div>
+
+      <!-- Search card -->
+      <section class="search-card" aria-labelledby="searchHeading">
+        <h2 id="searchHeading" class="sr-only">Search</h2>
+
+        <!-- Single mode -->
+        <div id="singleSearch" class="search-row">
+          <div class="search-field">
+            <label for="singleInput" class="field-label">GitHub username</label>
+            <input
+              type="text"
+              id="singleInput"
+              class="input"
+              placeholder="e.g. octocat"
+              autocomplete="off"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-describedby="singleInputError"
+              maxlength="39"
+            />
+            <div id="singleInputError" class="field-error" role="alert" hidden></div>
+          </div>
+          <button id="singleSearchBtn" type="button" class="btn btn-primary" aria-label="Search GitHub user">
+            Search
+          </button>
+        </div>
+
+        <!-- Battle mode -->
+        <div id="battleSearch" class="search-row" hidden>
+          <div class="search-field">
+            <label for="battleInput1" class="field-label">User A</label>
+            <input
+              type="text"
+              id="battleInput1"
+              class="input"
+              placeholder="First username"
+              autocomplete="off"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-describedby="battleInput1Error"
+              maxlength="39"
+            />
+            <div id="battleInput1Error" class="field-error" role="alert" hidden></div>
+          </div>
+          <div class="search-field">
+            <label for="battleInput2" class="field-label">User B</label>
+            <input
+              type="text"
+              id="battleInput2"
+              class="input"
+              placeholder="Second username"
+              autocomplete="off"
+              spellcheck="false"
+              autocapitalize="off"
+              aria-describedby="battleInput2Error"
+              maxlength="39"
+            />
+            <div id="battleInput2Error" class="field-error" role="alert" hidden></div>
+          </div>
+          <button id="battleSearchBtn" type="button" class="btn btn-primary" aria-label="Compare two GitHub users">
+            ⚔️ Battle
+          </button>
+        </div>
+      </section>
+
+      <!-- Dynamic result area -->
+      <section id="resultArea" aria-live="polite" aria-atomic="false">
+        <!-- Filled by script.js (empty / loading / profile / repos / battle / error) -->
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <span>Dev-Detective · Vanilla JS · GitHub REST API</span>
+        <span>Built with Fetch API + Async/Await</span>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
