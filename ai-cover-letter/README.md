@@ -1,16 +1,36 @@
-# React + Vite
+# AI Cover Letter Generator 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, production-ready AI Software-as-a-Service (SaaS) application that dynamically generates personalized, professional cover letters. This project leverages the Google Gemini API for intelligent generation and `pdfjs-dist` for local, secure resume parsing.
 
-Currently, two official plugins are available:
+**[View Live Demo]** *((https://coverletter1.vercel.app/))*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+* **Intelligent Prompt Engineering:** Uses the Google Gemini API (Gemini 3.5 Flash) to generate highly contextual cover letters based on the user's target role, company, and skills.
+* **Smart Resume Parsing (Phase 3):** Users can upload their PDF resume. The app extracts the text entirely on the client side using `pdf.js` and injects it into the LLM context payload for hyper-personalized output.
+* **Instant Copy-to-Clipboard:** Cleanly formats the LLM output into HTML paragraphs with a 1-click clipboard utility.
+* **Responsive UI/UX:** Styled completely with Tailwind CSS v4 for a polished, mobile-responsive layout, including graceful loading states and error handling for API rate limits.
+* **Secure Architecture:** API keys are protected via Vite environment variables and abstracted from the public repository.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the Oxlint configuration
+* **Frontend:** React.js, Vite
+* **Styling:** Tailwind CSS (v4 Vite Plugin)
+* **AI Provider:** Google Generative AI SDK (`@google/generative-ai`)
+* **File Parsing:** PDF.js (`pdfjs-dist`)
+* **Deployment:** Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 🚀 Getting Started
+
+Follow these instructions to set up the project locally on your machine.
+
+### Prerequisites
+* Node.js (v18 or higher recommended)
+* A free [Google Gemini API Key](https://aistudio.google.com/app/apikey)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/ai-cover-letter.git](https://github.com/your-username/ai-cover-letter.git)
+   cd ai-cover-letter
