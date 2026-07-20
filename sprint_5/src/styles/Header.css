@@ -1,0 +1,128 @@
+.app-header {
+  position: relative;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 55%, #0F172A 100%);
+  color: #fff;
+  padding: 32px 32px;
+  overflow: hidden;
+}
+
+/* Subtle gold sheen in the corner for a premium touch */
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  right: -10%;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.app-header__content {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.app-header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.app-header__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.app-header__subtitle {
+  margin-top: 2px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+/* --- Right side glass stat pills --- */
+.app-header__stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.header-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 108px;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.header-stat:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header-stat__number {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.header-stat__label {
+  margin-top: 2px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.header-stat--gold {
+  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(212, 175, 55, 0.12);
+}
+
+.header-stat--gold .header-stat__number {
+  color: var(--color-gold);
+}
+
+.header-stat--gold .header-stat__label {
+  color: rgba(212, 175, 55, 0.85);
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 22px 18px;
+  }
+  .app-header__stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .header-stat {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+  }
+}

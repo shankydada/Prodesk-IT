@@ -1,0 +1,175 @@
+.column {
+  --column-accent: #94A3B8;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow var(--transition-smooth), transform var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Colored top accent strip, unique per column via --column-accent */
+.column::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--column-accent);
+}
+
+.column:hover {
+  box-shadow: var(--shadow-medium);
+}
+
+.column__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 2px 4px 0;
+}
+
+.column__header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.column__icon {
+  font-size: 1.05rem;
+}
+
+.column__title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--color-slate);
+  letter-spacing: -0.2px;
+}
+
+.column__count {
+  background: color-mix(in srgb, var(--column-accent) 16%, white);
+  color: var(--column-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  border-radius: var(--radius-pill);
+  padding: 3px 12px;
+  border: 1px solid color-mix(in srgb, var(--column-accent) 35%, white);
+}
+
+.column__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 90px;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+  padding: 4px;
+}
+
+/* Visual feedback when a dragged card is hovering over this column */
+.column__body--over {
+  background-color: color-mix(in srgb, var(--column-accent) 8%, transparent);
+  outline: 2px dashed color-mix(in srgb, var(--column-accent) 45%, transparent);
+  outline-offset: -2px;
+}
+
+/* --- Empty state --- */
+.column__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 34px 12px;
+  color: var(--color-text-secondary);
+  animation: fadeIn var(--transition-smooth) both;
+}
+
+.column__empty-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.column__empty-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-slate);
+}
+
+.column__empty-subtitle {
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+}
+
+/* --- Add task form --- */
+.task-form {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-form__input {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.9);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.task-form__input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold-glow);
+}
+
+.task-form__row {
+  display: flex;
+  gap: 8px;
+}
+
+.task-form__select {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 9px 10px;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.task-form__select:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.task-form__button {
+  background: var(--color-navy);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.task-form__button:hover {
+  background: #1E293B;
+  transform: translateY(-1px);
+}
+
+.task-form__button:active {
+  transform: translateY(0);
+}

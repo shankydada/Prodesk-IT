@@ -1,0 +1,137 @@
+.task-card {
+  background: var(--color-card);
+  border-radius: var(--radius-md);
+  border-left: 5px solid #94a3b8; /* overridden inline by priority color */
+  box-shadow: var(--shadow-soft);
+  padding: 14px 16px;
+  transition: box-shadow var(--transition-smooth), transform var(--transition-smooth);
+  cursor: grab;
+}
+
+.task-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-4px) scale(1.01);
+}
+
+.task-card--dragging {
+  opacity: 0.5;
+  box-shadow: var(--shadow-lift);
+}
+
+.task-card__drag-handle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-card__text {
+  font-size: 0.92rem;
+  color: var(--color-text-primary);
+  line-height: 1.45;
+  word-break: break-word;
+  font-weight: 500;
+}
+
+.priority-badge {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.task-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 12px;
+  border-top: 1px solid #F1F5F9;
+  padding-top: 10px;
+}
+
+.task-card__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F8FAFC;
+  border-radius: var(--radius-sm);
+  width: 30px;
+  height: 30px;
+  color: var(--color-text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.task-card__icon-btn:hover:not(:disabled) {
+  background: var(--color-gold-soft);
+  color: var(--color-gold);
+  transform: translateY(-1px);
+}
+
+.task-card__icon-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.task-card__icon-btn--delete:hover {
+  background: #FEE2E2;
+  color: var(--color-red);
+}
+
+/* --- Inline editing --- */
+.task-card__edit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: popIn var(--transition-fast) both;
+}
+
+.task-card__edit-input {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: 0.9rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.task-card__edit-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold-glow);
+}
+
+.task-card__edit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.task-card__btn {
+  flex: 1;
+  border-radius: var(--radius-sm);
+  padding: 8px 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.task-card__btn--save {
+  background: var(--color-navy);
+  color: #fff;
+}
+
+.task-card__btn--save:hover {
+  background: #1E293B;
+  transform: translateY(-1px);
+}
+
+.task-card__btn--cancel {
+  background: #F1F5F9;
+  color: var(--color-text-secondary);
+}
+
+.task-card__btn--cancel:hover {
+  background: #E2E8F0;
+}
