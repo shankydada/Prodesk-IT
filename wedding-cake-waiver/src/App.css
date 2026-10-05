@@ -552,6 +552,19 @@ textarea:focus {
   cursor: not-allowed;
 }
 
+.loading-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .secondary-button {
   background: linear-gradient(135deg, rgba(100, 116, 139, 0.3), rgba(71, 85, 105, 0.2));
   border: 1.5px solid rgba(148, 163, 184, 0.3);

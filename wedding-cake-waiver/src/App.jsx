@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
+import { sanitizeInput, validateStepData } from './validation'
 
 const totalSteps = 3
 const stepLabels = ['Event Details', 'Contact & Cake Specs', 'Review & Acceptance']
@@ -30,33 +31,26 @@ const initialForm = {
   signature: '',
 }
 
-const sanitizeInput = (value) => {
-  if (typeof value !== 'string') {
-    return ''
-  }
-
-  return value
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/&/g, '&amp;')
-    .replace(/\s{2,}/g, ' ')
-    .trim()
-}
-
 const logAnalytics = (message) => {
   console.log(`[Analytics] ${message}`)
 }
 
-const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-const isValidPhone = (value) => /^[0-9+()\-\s]{7,20}$/.test(value)
+const draftStorageKey = 'wedding-cake-waiver-draft'
 
 function App() {
-  const [formData, setFormData] = useState(initialForm)
+  const [formData, setFormData] = useState(() => {
+    try {
+      const savedDraft = typeof window !== 'undefined' ? window.localStorage.getItem(draftStorageKey) : null
+      return savedDraft ? { ...initialForm, ...JSON.parse(savedDraft) } : initialForm
+    } catch {
+      return initialForm
+    }
+  })
   const [currentStep, setCurrentStep] = useState(1)
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isOffline, setIsOffline] = useState(!navigator.onLine)
+  const [isOffline, setIsOffline] = useState(() => typeof navigator !== 'undefined' && !navigator.onLine)
 
   useEffect(() => {
     const handleOnlineStatus = () => setIsOffline(!navigator.onLine)
@@ -67,6 +61,15 @@ function App() {
       window.removeEventListener('offline', handleOnlineStatus)
     }
   }, [])
+
+  useEffect(() => {
+    if (!isSubmitted) {
+      try {
+        window.localStorage.setItem(draftStorageKey, JSON.stringify(formData))
+      } catch {
+      }
+    }
+  }, [formData, isSubmitted])
 
   const progress = useMemo(() => (currentStep / totalSteps) * 100, [currentStep])
 
@@ -83,29 +86,7 @@ function App() {
   }
 
   const validateStep = (step) => {
-    const nextErrors = {}
-
-    if (step === 1) {
-      if (!formData.clientName.trim()) nextErrors.clientName = 'Client name is required.'
-      if (!formData.eventDate) nextErrors.eventDate = 'Event date is required.'
-      if (!formData.venue.trim()) nextErrors.venue = 'Venue is required.'
-      if (!formData.guestCount || Number(formData.guestCount) < 10 || Number(formData.guestCount) > 2000) {
-        nextErrors.guestCount = 'Guest count must be between 10 and 2000.'
-      }
-    }
-
-    if (step === 2) {
-      if (!formData.contactName.trim()) nextErrors.contactName = 'Contact name is required.'
-      if (!formData.phone || !isValidPhone(formData.phone)) nextErrors.phone = 'Enter a valid phone number.'
-      if (!formData.email || !isValidEmail(formData.email)) nextErrors.email = 'Enter a valid email.'
-      if (!formData.cakeType.trim()) nextErrors.cakeType = 'Cake type is required.'
-    }
-
-    if (step === 3) {
-      if (!formData.signature.trim()) nextErrors.signature = 'Signature is required to approve the waiver.'
-      if (!formData.waiverAccepted) nextErrors.waiverAccepted = 'Please accept the dietary waiver.'
-    }
-
+    const nextErrors = validateStepData(formData, step)
     setErrors(nextErrors)
     return Object.keys(nextErrors).length === 0
   }
@@ -150,6 +131,10 @@ function App() {
 
     setIsSubmitting(false)
     setIsSubmitted(true)
+    try {
+      window.localStorage.removeItem(draftStorageKey)
+    } catch {
+    }
   }
 
   const reviewItems = [
@@ -169,7 +154,7 @@ function App() {
     <div className="app-shell">
       <div className="backdrop-glow" aria-hidden="true" />
 
-      <div className="glass-panel" role="application" aria-label="Wedding cake contract and dietary waiver form">
+      <main className="glass-panel" aria-label="Wedding cake contract and dietary waiver form">
         <header className="topbar">
           <div>
             <p className="eyebrow">Wedding Operations</p>
@@ -193,8 +178,8 @@ function App() {
           ))}
         </div>
 
-        <div className="progress-wrap" aria-label="Form progress">
-          <div className="progress-bar" style={{ width: `${progress}%` }} />
+        <div className="progress-wrap" role="progressbar" aria-label="Form progress" aria-valuemin="1" aria-valuemax={totalSteps} aria-valuenow={currentStep}>
+          <div className="progress-bar" style={{ width: `${progress}%` }} aria-hidden="true" />
         </div>
 
         {isOffline && (
@@ -228,6 +213,7 @@ function App() {
                 setCurrentStep(1)
                 setErrors({})
                 setIsSubmitted(false)
+                window.localStorage.removeItem(draftStorageKey)
               }}
             >
               Start another record
@@ -457,10 +443,11 @@ function App() {
                     checked={formData.waiverAccepted}
                     onChange={(event) => updateField('waiverAccepted', event.target.checked)}
                     aria-invalid={Boolean(errors.waiverAccepted)}
+                    aria-describedby={errors.waiverAccepted ? 'waiverAccepted-error' : undefined}
                   />
                   <span>I confirm that the dietary waiver and event details are accurate.</span>
                 </label>
-                {errors.waiverAccepted && <span className="error-text block">{errors.waiverAccepted}</span>}
+                {errors.waiverAccepted && <span id="waiverAccepted-error" className="error-text block">{errors.waiverAccepted}</span>}
               </section>
             )}
 
@@ -479,14 +466,15 @@ function App() {
                   Next step
                 </button>
               ) : (
-                <button type="submit" className="primary-button" disabled={isSubmitting}>
-                  {isSubmitting ? 'Submitting...' : 'Submit waiver'}
+                <button type="submit" className="primary-button" disabled={isSubmitting} aria-busy={isSubmitting}>
+                  {isSubmitting && <span className="loading-spinner" aria-hidden="true" />}
+                  <span>{isSubmitting ? 'Submitting...' : 'Submit waiver'}</span>
                 </button>
               )}
             </div>
           </form>
         )}
-      </div>
+      </main>
     </div>
   )
 }

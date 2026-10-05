@@ -1,0 +1,29 @@
+name: Wedding Cake Waiver
+
+on:
+  push:
+    paths:
+      - 'wedding-cake-waiver/**'
+      - '.github/workflows/wedding-cake-waiver.yml'
+  pull_request:
+    paths:
+      - 'wedding-cake-waiver/**'
+      - '.github/workflows/wedding-cake-waiver.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: wedding-cake-waiver
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: wedding-cake-waiver/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
